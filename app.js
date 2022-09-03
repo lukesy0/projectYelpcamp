@@ -22,11 +22,12 @@ app.set('views', path.join(__dirname, 'views'))
 app.get('/',(req,res) =>{
     res.render('home');
 })
-app.get('/makenewcampground',async(req,res) =>{
-    const campground = new Campground({title:"A",price: 1});
-    await campground.save();
-    res.send(campground);
+app.get('/campgrounds',async (req,res) =>{
+    const campgrounds = await Campground.find({});
+    res.render('campgrounds/index',{ campgrounds })
+
 })
+
 
 app.listen(5853, () =>{
     console.log('Listining');
